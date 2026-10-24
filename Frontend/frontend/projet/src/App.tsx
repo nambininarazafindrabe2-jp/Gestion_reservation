@@ -69,6 +69,7 @@ function App() {
   const fail = useCallback((text: string) => setNotice({ kind: 'error', text }), []);
   const ok = useCallback((text: string) => setNotice({ kind: 'success', text }), []);
   const [selectedResa, setSelectedResa] = useState<Reservation | null>(null);
+    
 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
@@ -1051,6 +1052,31 @@ function App() {
                     </option>
                   ))}
                 </select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="nombrep">Nombre de personnes</label>
+                <input
+                  id="nombrep"
+                  type="number"
+                  name="nombrep"
+                  min={1}
+                  max={voitures.find(v => v.numv === newResa.numv)?.capaciteV || 32}
+                  step={1}
+                  value={newResa.nombrep}
+                  required
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      setNewResa({ ...newResa, nombrep: 1 });
+                      return;
+                    }
+
+                    const nombre = Number(value);
+                    if (Number.isInteger(nombre) && nombre >= 1) {
+                      setNewResa({ ...newResa, nombrep: nombre });
+                    }
+                  }}
+                />
               </div>
 
               <button className="btn" type="submit">
