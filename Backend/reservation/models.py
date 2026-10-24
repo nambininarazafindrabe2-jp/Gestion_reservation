@@ -1,20 +1,11 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Client(models.Model):
     codec = models.CharField(primary_key=True, max_length=20, db_column='CODEC')
     nomc = models.CharField(max_length=60, db_column='NomC')
     prenomc = models.CharField(max_length=60, db_column='PrenomC')
-    contact = models.CharField(
-        max_length=10,
-        db_column='Contact',
-        validators=[
-            RegexValidator(
-                regex=r'^[0-9]{10}$',
-                message="Le contact doit contenir exactement 10 chiffres (0 à 9).",
-            )
-        ],
-    )
+    contact = models.CharField(max_length=20, db_column='Contact')
 
     class Meta:
         db_table = 'CLIENTS'
@@ -24,11 +15,14 @@ class Client(models.Model):
 class Voiture(models.Model):
     numv = models.CharField(primary_key=True, max_length=30, db_column='NUMV')
     marqueV = models.CharField(max_length=60, db_column='MarkV')
-    capaciteV = models.IntegerField(default=32, db_column='NbPlacesMax',
+    capaciteV = models.IntegerField(
+        default=32,
+        db_column='NbPlacesMax',
         validators=[
             MinValueValidator(18, message="La capacité minimale est de 18 places."),
-            MaxValueValidator(32, message="La capacité maximale est de 32 places.")
-        ])  
+            MaxValueValidator(32, message="La capacité maximale est de 32 places."),
+        ],
+    )
 
     class Meta:
         db_table = 'VOITURE'
