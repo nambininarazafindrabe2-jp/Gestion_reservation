@@ -1,0 +1,10 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Confirmer la suppression</h2>
+<p>Voulez-vous supprimer la voiture N°<strong>{{ voiture.numv }} - {{ voiture.markv }}</strong> ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmer la suppression</button>
+</form>
+<a href="{% url 'voiture_list_name' %}">Annuler</a>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'layout/index.html' %}
+
+{% block content %}
+<h1>Bienvenue, {{ user.username }}</h1>
+<p><a href="{% url 'list_name' %}">Voir les réservations</a></p>
+{% endblock %}

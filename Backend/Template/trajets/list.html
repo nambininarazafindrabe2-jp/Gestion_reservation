@@ -1,0 +1,26 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Liste des Trajets</h2>
+<a href="{% url 'trajet_insert_name' %}">Ajouter un trajet</a>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Destination</th>
+            <th>Frais</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for trajet in trajets %}
+        <tr>
+            <td>{{ trajet.destinations }}</td>
+            <td>{{ trajet.frais }} Ar</td>
+            <td>
+                <a href="{% url 'trajet_update_name' trajet.pk %}">Modifier</a> |
+                <a href="{% url 'trajet_delete_name' trajet.pk %}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

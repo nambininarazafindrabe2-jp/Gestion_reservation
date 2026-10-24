@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reçu de Réservation - {{ reservation.coder }}</title>
+    
+</head>
+<body>
+
+<div class="receipt-card">
+    <div class="header">
+        <div>
+            <h1>Gestions_RT</h1>
+            <small>Reçu Officiel de Réservation</small>
+        </div>
+        <div>
+            <strong>N° {{ reservation.coder }}</strong>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Date de réservation</label>
+                <span>{{ reservation.datesr }}</span>
+            </div>
+            <div class="info-item">
+                <label>Code Client</label>
+                <span>{{ reservation.codec|default:"Non spécifié" }}</span>
+            </div>
+            <div class="info-item">
+                <label>Destination</label>
+                <span style="color: #0284c7;">
+                    {% for c in contenus %}
+                        {{ c.destinations }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        Non renseignée
+                    {% endfor %}
+                </span>
+            </div>
+            <div class="info-item">
+                <label>Heure Départ ➔ Arrivée</label>
+                <span>{{ reservation.departr }} ➔ {{ reservation.arriver }}</span>
+            </div>
+            <div class="info-item">
+                <label>Siège(s) réservé(s)</label>
+                <span>{{ reservation.placesr }}</span>
+            </div>
+            <div class="info-item">
+                <label>Nombre de personnes</label>
+                <span>{{ reservation.nombrep }} </span>
+            </div>
+            <div class="info-item">
+                <label>Véhicule</label>
+                <span>{{ reservation.numv|default:"En attente" }}</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="total-box">
+            <label style="font-weight:600; color:#15803d;">Montant Total</label>
+            <span>
+                {% if contenus.0.montants %}
+                    {{ contenus.0.montants }}
+                {% else %}
+                    15 000
+                {% endif %} Ar
+            </span>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="/" class="btn-back" onclick="if(window.history.length > 1) { window.history.back(); return false; }">
+            ← Retour à l'application
+        </a>
+        <button class="btn-print" onclick="window.print()">Imprimer le Reçu</button>
+    </div>
+</div>
+
+</body>
+</html>

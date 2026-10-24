@@ -1,0 +1,10 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Modifier le montant du contenu</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Mettre à jour</button>
+</form>
+<a href="{% url 'contenir_list_name' %}">Annuler</a>
+{% endblock %}

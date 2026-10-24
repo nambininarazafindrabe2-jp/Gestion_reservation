@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Accueil{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home_name' %}">Accueil</a>
+            </li>
+            <li>
+                <a href="{% url 'client_list_name' %}">Clients</a>
+            </li>
+            <li>
+                <a href="{% url 'voiture_list_name' %}">Voitures</a>
+            </li>
+            <li>
+                <a href="{% url 'trajet_list_name' %}">Trajets</a>
+            </li>
+            <li>
+            <li>
+                <a href="{% url 'list_name' %}">Réservations</a>
+            </li>
+            <li>
+                <a href="{% url 'contenir_list_name' %}">Contenus de Réservation</a>
+            </li>
+            <li>
+                <i class="fa fa-right-from-bracket"></i>
+                <a href="{% url 'logout_name' %}">Déconnexion ({{ user.username }})</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'login_name' %}">Connexion</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

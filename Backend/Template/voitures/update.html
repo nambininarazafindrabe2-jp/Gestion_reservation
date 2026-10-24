@@ -1,0 +1,11 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Modifier la Voiture</h2>
+<p><strong>Numéro Voiture (NUMV) :</strong> {{ object.numv }}</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Mettre à jour</button>
+</form>
+<a href="{% url 'voiture_list_name' %}">Annuler</a>
+{% endblock %}

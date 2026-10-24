@@ -1,0 +1,54 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Liste des Réservations</h2>
+
+<form method="get" style="margin-bottom: 20px;">
+    <label for="date_debut">Du :</label>
+    <input type="date" id="date_debut" name="date_debut" value="{{ request.GET.date_debut }}">
+    
+    <label for="date_fin">Au :</label>
+    <input type="date" id="date_fin" name="date_fin" value="{{ request.GET.date_fin }}">
+    
+    <input type="text" name="search" placeholder="Recherche client / place..." value="{{ request.GET.search }}">
+    <button type="submit">Filtrer</button>
+    <a href="{% url 'list_name' %}">Réinitialiser</a>
+</form>
+
+<a href="{% url 'insert_name' %}">Nouvelle réservation</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Date</th>
+            <th>Départ</th>
+            <th>Arrivée</th>
+            <th>Client</th>
+            <th>Voiture</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in reservations %}
+        <tr>
+            <td>{{ r.coder }}</td>
+            <td>{{ r.datesr|date:"d/m/Y" }}</td>
+            <td>{{ r.departr }}</td>
+            <td>{{ r.arriver }}</td>
+            <td>{{ r.codec.nomc }} {{ r.codec.prenomc }}</td>
+            <td>{{ r.numv.markv }} ({{ r.numv.numv }})</td>
+            <td>
+                <a href="{% url 'info_name' r.pk %}">Détails</a> |
+                <a href="{% url 'update_name' r.pk %}">Modifier</a> |
+                <a href="{% url 'delete_name' r.pk %}">Supprimer</a>
+                <a href="{% url 'reservation_recu_name' r.pk %}" target="_blank">📄 Imprimer Reçu</a> |
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Aucune réservation trouvée pour cette période.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

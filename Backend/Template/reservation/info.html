@@ -1,0 +1,23 @@
+{% extends 'layout/index.html' %}
+
+{% block title %}Réservation {{ reservation.coder }}{% endblock %}
+
+{% block content %}
+<h1>Réservation N°{{ reservation.coder }}</h1>
+<ul>
+    <li>Date : {{ reservation.datesr|date:"d/m/Y" }}</li>
+    <li>Départ : {{ reservation.departr|time:"H:i" }}</li>
+    <li>Arrivée : {{ reservation.arriver|time:"H:i" }}</li>
+    <li>Places : {{ reservation.placesr }}</li>
+    <li>Nombre de personnes : {{ reservation.nombrep }}</li>
+    <li>Client : {{ reservation.codec }}</li>
+    <li>Voiture : {{ reservation.numv }}</li>
+</ul>
+
+<form action="{% url 'redirect_name' reservation.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="action" value="Modifier">Modifier</button>
+    <button type="submit" name="action" value="Supprimer">Supprimer</button>
+</form>
+<p><a href="{% url 'list_name' %}">&laquo; Retour à la liste</a></p>
+{% endblock %}

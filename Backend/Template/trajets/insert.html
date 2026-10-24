@@ -1,0 +1,10 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Nouveau Trajet</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>
+<a href="{% url 'trajet_list_name' %}">Annuler</a>
+{% endblock %}

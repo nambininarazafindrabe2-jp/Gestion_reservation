@@ -1,0 +1,16 @@
+:root {
+  --ink: #12303a;
+  --ink-soft: #566f78;
+  --paper: #f2f6f7;
+  --surface: #ffffff;
+  --line: #d5e0e3;
+  --side: #0f2530;
+  --teal: #0e7c86;
+  --amber: #e8a317;
+  --danger: #b3261e;
+  --ok: #1b7f4b;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; display: block; background: var(--paper); color: var(--ink); line-height: 1.5; }
+#root { max-width: none; margin: 0; padding: 0; text-align: left; }

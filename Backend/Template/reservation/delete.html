@@ -1,0 +1,14 @@
+{% extends 'layout/index.html' %}
+
+{% block title %}Supprimer{% endblock %}
+
+{% block content %}
+<h1>Supprimer la réservation N°{{ reservation.coder }} ?</h1>
+<p>Client : {{ reservation.codec }} — Le {{ reservation.datesr|date:"d/m/Y" }}</p>
+
+<form action="{% url 'deleteOperation_name' reservation.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Oui, supprimer</button>
+    <a href="{% url 'list_name' %}">Annuler</a>
+</form>
+{% endblock %}

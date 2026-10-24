@@ -1,0 +1,28 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Liste des Contenus de Réservation</h2>
+<a href="{% url 'contenir_insert_name' %}">Associer un trajet à une réservation</a>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Code Réservation</th>
+            <th>Destination</th>
+            <th>Montant</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contenu in contenus %}
+        <tr>
+            <td>N°{{ contenu.coder.coder }}</td>
+            <td>{{ contenu.destinations.destinations }}</td>
+            <td>{{ contenu.montants }} Ar</td>
+            <td>
+                <a href="{% url 'contenir_update_name' contenu.pk %}">Modifier</a> |
+                <a href="{% url 'contenir_delete_name' contenu.pk %}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

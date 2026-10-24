@@ -1,0 +1,10 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Confirmer la suppression</h2>
+<p>Voulez-vous supprimer le trajet vers <strong>{{ trajet.destinations }}</strong> ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmer</button>
+</form>
+<a href="{% url 'trajet_list_name' %}">Annuler</a>
+{% endblock %}

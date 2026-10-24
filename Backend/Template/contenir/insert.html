@@ -1,0 +1,37 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Ajouter un Trajet à une Réservation</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>
+
+<a href="{% url 'contenir_list_name' %}">Annuler</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const destinationSelect = document.getElementById('id_destinations');
+    const montantInput = document.getElementById('id_montants');
+
+    if (destinationSelect) {
+        destinationSelect.addEventListener('change', function () {
+            const selectedDestination = this.value;
+            if (selectedDestination) {
+                fetch(`{% url 'get_frais_trajet' %}?destination=${encodeURIComponent(selectedDestination)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.frais !== undefined) {
+                            montantInput.value = data.frais;
+                        }
+                    })
+                    .catch(error => console.error('Erreur :', error));
+            } else {
+                montantInput.value = '';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

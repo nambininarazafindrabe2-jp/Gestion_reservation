@@ -1,0 +1,13 @@
+{% extends 'layout/index.html' %}
+
+{% block title %}Modifier la réservation{% endblock %}
+
+{% block content %}
+<h1>Modifier la réservation</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+    <a href="{% url 'list_name' %}">Annuler</a>
+</form>
+{% endblock %}

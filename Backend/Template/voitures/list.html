@@ -1,0 +1,30 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+<h2>Liste des Voitures</h2>
+<a href="{% url 'voiture_insert_name' %}">Ajouter une voiture</a>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Numéro (NUMV)</th>
+            <th>Marque (MarkV)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for voiture in voitures %}
+        <tr>
+            <td>{{ voiture.numv }}</td>
+            <td>{{ voiture.markv }}</td>
+            <td>
+                <a href="{% url 'voiture_update_name' voiture.pk %}">Modifier</a> |
+                <a href="{% url 'voiture_delete_name' voiture.pk %}">Supprimer</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Aucune voiture enregistrée.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
